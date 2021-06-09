@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Persistence;
+using Shared.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +15,43 @@ namespace PLCalculatorDemo
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            //bool isService = !(Debugger.IsAttached || args.Contains("--console"));
+
+            //if (isService)
+            //{
+            //    string pathToExe = Process.GetCurrentProcess().MainModule.FileName;
+            //    string pathToContentRoot = Path.GetDirectoryName(pathToExe);
+            //    Directory.SetCurrentDirectory(pathToContentRoot);
+            //}
+
+            IHostBuilder builder = CreateHostBuilder(args);
+
+            IHost host = builder.Build();
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostContext, configApp) =>
+                {
+                    configApp.ConfigureDefaultJson()
+                             .AddPersistenceJson();
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseKestrel((context, options) =>
+                    {
+                        options.AddServerHeader = false;
+                        options.Limits.MaxRequestBodySize = 1073741274;
+                        options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(120);
+                        options.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(120);
+                        options.ListenAnyIP(context.Configuration.GetValue<int>("AppPort"));
+                    });
+                    webBuilder.UseIIS();
+                    webBuilder.UseIISIntegration();
                     webBuilder.UseStartup<Startup>();
                 });
     }
 }
+
