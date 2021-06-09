@@ -5,6 +5,16 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLCalculatorDemo", "PLCalculatorDemo\PLCalculatorDemo.csproj", "{76743233-5AF0-44AE-96EA-0220E930CBB7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{49031B2B-3439-419A-BE0A-0FD094A7C757}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{68708F82-2742-4F25-A8A4-30E4D74570A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{B349C443-E53C-4C2B-9A20-3ABE7457D890}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Core", "2 - Core", "{ED85D371-9836-4650-864A-577023D8F944}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infrastructure", "3 - Infrastructure", "{C91F60A8-CD86-43AC-9549-7B42C1791E15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +28,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{76743233-5AF0-44AE-96EA-0220E930CBB7} = {B349C443-E53C-4C2B-9A20-3ABE7457D890}
+		{B349C443-E53C-4C2B-9A20-3ABE7457D890} = {49031B2B-3439-419A-BE0A-0FD094A7C757}
+		{ED85D371-9836-4650-864A-577023D8F944} = {49031B2B-3439-419A-BE0A-0FD094A7C757}
+		{C91F60A8-CD86-43AC-9549-7B42C1791E15} = {49031B2B-3439-419A-BE0A-0FD094A7C757}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FC4A732-4350-4880-8A02-B782E3CC8772}
