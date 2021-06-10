@@ -1,26 +1,26 @@
 ﻿using Application.Common.Interfaces;
 using Application.Extensions;
-using System;
+using Domain.Entities;
 
 namespace Application.Services
 {
-    public class ProfitSharingCalculatorService : IProfitSharingCalculatorService
+    public class ProfitSharingCalculatorService : ICalculatorService
     {
-        public int AreaShare { get; private set; }
+        private int AreaShare;
 
-        public int SalaryShare { get; private set; }
+        private int SalaryShare;
 
-        public int AdmissionShare { get; private set; }
+        private int AdmissionShare;
 
-        public long CalculateProfitSharingBonus(string area, long salaryRange, long salary, DateTime admissionDate)
+        public decimal CalculateResult(Employee employee)
         {
-            AreaShare = ProfitSharingRuleExtension.CalculateAreaShare(area);
-            SalaryShare = ProfitSharingRuleExtension.CalculateSalaryShare(salaryRange);
-            AdmissionShare = ProfitSharingRuleExtension.CalculateAdmissionShare(admissionDate.Year);
+            AreaShare = employee.CalculateAreaShare();
+            SalaryShare = employee.CalculateSalaryShare();
+            AdmissionShare = employee.CalculateAdmissionShare();
 
-            return CalculateBonus(salary);
+            return CalculateBonus(employee.GrossWage);
         }
 
-        private long CalculateBonus(long salary) => (salary * AdmissionShare + salary * AreaShare / (salary * SalaryShare)) * 12;
+        private decimal CalculateBonus(decimal grossWage) => (((grossWage * AdmissionShare) + (grossWage * AreaShare)) / (grossWage * SalaryShare)) * 12;
     }
 }

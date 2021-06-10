@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using MediatR;
-using Application.Common.Interfaces;
 using Application.Services;
+using Application.Common.Interfaces;
 
 namespace Application
 {
@@ -12,7 +12,7 @@ namespace Application
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddScoped<IProfitSharingCalculatorService, ProfitSharingCalculatorService>();
+            services.AddScoped<ICalculatorService, ProfitSharingCalculatorService>();
 
             return services;
         }
