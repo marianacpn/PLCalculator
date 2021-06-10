@@ -22,8 +22,8 @@ namespace PLCalculatorDemo
         {
             services.AddControllers();
 
-            services.AddApplication();
-            services.AddPersistence(Configuration);
+            services.AddApplication()
+                    .AddPersistence(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

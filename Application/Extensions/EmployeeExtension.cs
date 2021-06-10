@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Shared.Constants;
 using System;
+using Shared.Extensions;
 
 namespace Application.Extensions
 {
@@ -50,14 +51,15 @@ namespace Application.Extensions
 
         public static int CalculateAreaShare(this Employee employee)
         {
-            return employee.Area switch
+            return employee.Area.Normalize(StringFormatType.lower, true) switch
             {
-                "Diretoria" => 1,
-                "Contabilidade" => 2,
-                "Financeiro" => 2,
-                "Tecnologia" => 2,
-                "Serviços Gerais" => 3,
-                _ => 5,
+                "diretoria" => 1,
+                "contabilidade" => 2,
+                "financeiro" => 2,
+                "tecnologia" => 2,
+                "servicosgerais" => 3,
+                "relacionamentocomocliente" => 5,
+                _ => throw new ArgumentOutOfRangeException(),
             };
         }
     }
