@@ -11,15 +11,6 @@ namespace PLCalculatorDemo
     {
         public static void Main(string[] args)
         {
-            //bool isService = !(Debugger.IsAttached || args.Contains("--console"));
-
-            //if (isService)
-            //{
-            //    string pathToExe = Process.GetCurrentProcess().MainModule.FileName;
-            //    string pathToContentRoot = Path.GetDirectoryName(pathToExe);
-            //    Directory.SetCurrentDirectory(pathToContentRoot);
-            //}
-
             IHostBuilder builder = CreateHostBuilder(args);
 
             IHost host = builder.Build();

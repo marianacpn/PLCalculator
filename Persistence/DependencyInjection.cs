@@ -1,6 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence.Repository;
 using System;
 
 namespace Persistence
@@ -12,15 +13,14 @@ namespace Persistence
             services.AddOptions();
 
             //services.Configure<DbConnectionConfig>(options => configuration.GetSection("DbConnection").Bind(options));
-            services.AddScoped<IApplicationContext, ApplicationContext>();
-            //services.AddScoped<IApplicationContext>(provider => provider.GetService<ApplicationContext>());
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             return services;
         }
         public static IConfigurationBuilder AddPersistenceJson(this IConfigurationBuilder configuration)
         {
             return configuration.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                                .AddJsonFile("appsettings.db.json", optional: true, reloadOnChange: true);
+                                .AddJsonFile("appsettings.db.json", optional: false, reloadOnChange: true);
         }
     }
 }

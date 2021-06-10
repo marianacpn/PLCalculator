@@ -1,15 +1,26 @@
-﻿namespace Domain.Entities
+﻿using System;
+
+namespace Domain.Entities
 {
     public class Employee
     {
-        public string Name { get; set; }
+        public Employee(string name, string registration, string area, decimal grossWage, DateTime admissionDate)
+        {
+            Name = name;
+            Registration = registration;
+            Area = area;
+            GrossWage = grossWage;
+            AdmissionDate = admissionDate;
+        }
 
-        public string Registration { get; set; }
+        public string Name { get; }
 
-        public string Area { get; set; }
+        public string Registration { get; }
 
-        public string GrossWage { get; set; }
+        public string Area { get; }
 
-        public string AdmissionDate { get; set; }
+        public decimal GrossWage { get; }
+
+        public DateTime AdmissionDate { get; }
     }
 }
