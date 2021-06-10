@@ -1,6 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence.Repository;
 using System;
 
 namespace Persistence
@@ -12,7 +13,7 @@ namespace Persistence
             services.AddOptions();
 
             //services.Configure<DbConnectionConfig>(options => configuration.GetSection("DbConnection").Bind(options));
-            services.AddScoped<IEmployeeRepository, IEmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             return services;
         }
