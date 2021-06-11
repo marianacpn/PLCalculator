@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Repository;
+using Shared.Configurations;
 using System;
 
 namespace Persistence
@@ -12,7 +13,7 @@ namespace Persistence
         {
             services.AddOptions();
 
-            //services.Configure<DbConnectionConfig>(options => configuration.GetSection("DbConnection").Bind(options));
+            services.Configure<FirebaseConfiguration>(options => configuration.GetSection("FirebaseConnection").Bind(options));
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             return services;
