@@ -2,8 +2,9 @@
 using Shared.Extensions;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
-namespace Application.Employees.Queries.NewFolder
+namespace Application.Employees.Queries.GetProfitSharingCalculation
 {
     public class ProfitSharingVm
     {
@@ -13,27 +14,29 @@ namespace Application.Employees.Queries.NewFolder
 
             _totalEmployees = Participants.Count();
             _distributedTotal = Participants.Sum(e => e.PsResult);
-            
+
             AvailableTotal = availableValue.ToStringCurrencyFormat();
             _totalBalance = availableValue - _distributedTotal;
         }
 
+        [JsonPropertyName("participantes")]
+        public IEnumerable<ParticipantsDto> Participants { get; set; }
+
         private int _totalEmployees;
-        [JsonProperty("total_de_funcionarios")]
+        [JsonPropertyName("total_de_funcionarios")]
         public string TotalEmployees => _totalEmployees.ToString();
 
         private decimal _distributedTotal;
-        [JsonProperty("total_distribuido")]
+        [JsonPropertyName("total_distribuido")]
         public string DistributedTotal => _distributedTotal.ToStringCurrencyFormat();
 
-        [JsonProperty("total_disponibilizado")]
+        [JsonPropertyName("total_disponibilizado")]
         public string AvailableTotal { get; set; }
 
         private decimal _totalBalance;
-        [JsonProperty("saldo_total_disponibilizado")]
+        [JsonPropertyName("saldo_total_disponibilizado")]
         public string AvailableTotalBalance => _totalBalance.ToStringCurrencyFormat();
 
-        [JsonProperty("participantes")]
-        public IEnumerable<ParticipantsDto> Participants { get; set; }
+     
     }
 }

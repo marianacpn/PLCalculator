@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shared.Constants;
+using System;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -47,6 +48,6 @@ namespace Shared.Extensions
             return value;
         }
 
-        public static decimal ToDecimalCurrencyFormat(this string value) => Convert.ToDecimal(value.Replace("R$", "").Trim());
+        public static decimal ToDecimalCurrencyFormat(this string value) => Decimal.Parse(value.Replace("R$", "").Trim(), SystemConst.DEFAULT_CULTURE);
     }
 }
