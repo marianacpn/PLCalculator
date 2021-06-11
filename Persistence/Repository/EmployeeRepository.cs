@@ -3,9 +3,14 @@ using Domain.Entities;
 using FireSharp;
 using FireSharp.Config;
 using FireSharp.Interfaces;
+using FireSharp.Response;
 using Microsoft.Extensions.Options;
+using Persistence.Repository.Dto;
 using Shared.Configurations;
+using Shared.Constants;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -29,10 +34,17 @@ namespace Persistence.Repository
             _firebaseClient = new FirebaseClient(_firebaseConfig);
         }
 
-        public Task<IEnumerable<Employee>> GetEmployees()
+        public async Task<IEnumerable<Employee>> GetEmployees()
         {
+            FirebaseResponse response = await _firebaseClient.GetAsync(SystemConst.EmployeeChild);
 
-            throw new System.NotImplementedException();
+            IEnumerable<Employee> employees = response.ResultAs<IEnumerable<EmployeeDto>>()
+                                                      .Select(e => new Employee(e.nome,
+                                                                                e.matricula,
+                                                                                e.area,
+                                                                                Convert.ToDecimal(e.salario_bruto),
+                                                                                DateTime.Parse(e.data_de_admissao)));
+            return employees;
         }
     }
 }
