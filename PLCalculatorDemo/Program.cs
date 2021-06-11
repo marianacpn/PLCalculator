@@ -22,19 +22,11 @@ namespace PLCalculatorDemo
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostContext, configApp) =>
                 {
-                    configApp.ConfigureDefaultJson()
-                             .AddPersistenceJson();
+                    configApp.AddPersistenceJson();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseKestrel((context, options) =>
-                    {
-                        options.AddServerHeader = false;
-                        options.Limits.MaxRequestBodySize = 1073741274;
-                        options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(120);
-                        options.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(120);
-                        options.ListenAnyIP(context.Configuration.GetValue<int>("AppPort"));
-                    });
+                    webBuilder.UseKestrel();
                     webBuilder.UseIIS();
                     webBuilder.UseIISIntegration();
                     webBuilder.UseStartup<Startup>();
