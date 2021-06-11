@@ -8,6 +8,6 @@ namespace Shared.Constants
 
         public static CultureInfo DEFAULT_CULTURE = new CultureInfo("pt-br");
 
-        public const string EmployeeChild = "employee";
+        public const string EmployeeChild = "employees";
     }
 }

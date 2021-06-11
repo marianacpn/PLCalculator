@@ -1,27 +1,27 @@
-﻿using Newtonsoft.Json;
-using Shared.Extensions;
+﻿using Shared.Extensions;
+using System.Text.Json.Serialization;
 
-namespace Application.Employees.Queries.NewFolder
+namespace Application.Employees.Queries.GetProfitSharingCalculation
 {
     public class ParticipantsDto
     {
         public ParticipantsDto(string registration, string nome, decimal profitSharingResult)
         {
-            this.Registration = registration;
-            this.Name = nome;
+            Registration = registration;
+            Name = nome;
             PsResult = profitSharingResult;
         }
 
-        [JsonProperty("matricula")]
+        [JsonPropertyName("matricula")]
         public string Registration { get; set; }
 
-        [JsonProperty("nome")]
+        [JsonPropertyName("nome")]
         public string Name { get; set; }
-   
+
         [JsonIgnore]
         public decimal PsResult { get; }
 
-        [JsonProperty("valor_da_participacao")]
+        [JsonPropertyName("valor_da_participacao")]
         public string ProfitSharingValue => PsResult.ToStringCurrencyFormat();
     }
 }

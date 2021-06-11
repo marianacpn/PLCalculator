@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Persistence.Repository.Dto;
 using Shared.Configurations;
 using Shared.Constants;
+using Shared.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,11 +40,12 @@ namespace Persistence.Repository
             FirebaseResponse response = await _firebaseClient.GetAsync(SystemConst.EmployeeChild);
 
             IEnumerable<Employee> employees = response.ResultAs<IEnumerable<EmployeeDto>>()
-                                                      .Select(e => new Employee(e.nome,
-                                                                                e.matricula,
-                                                                                e.area,
-                                                                                Convert.ToDecimal(e.salario_bruto),
-                                                                                DateTime.Parse(e.data_de_admissao)));
+                                    .Select(e => new Employee(e.nome,
+                                                              e.matricula,
+                                                              e.area,
+                                                              e.salario_bruto.ToDecimalCurrencyFormat(),
+                                                              DateTime.Parse(e.data_de_admissao)));
+
             return employees;
         }
     }
